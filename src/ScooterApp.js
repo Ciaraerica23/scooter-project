@@ -1,7 +1,8 @@
 //const User = require('./User')
-//const Scooter = require('./Scooter')
+const Scooter = require('./Scooter')
 
 let registeredUsers = {}
+
 let jfkScooters = [0]
 let wavyScooters = [0]
 let bridgemontScooters = [0]
@@ -12,6 +13,7 @@ bridgemontScooters: bridgemontScooters
 }
 let  logins= []
 let loggedIn = []
+
 class ScooterApp {
 
   
@@ -27,7 +29,7 @@ class ScooterApp {
         else if(Object.keys(registeredUsers).includes(username)){
             console.log( "user already registered")
         }else{
-        registeredUsers[username]=password
+        this.registeredUsers[username]=password
         logins.push(username)
         logins.push(password)
       
@@ -40,7 +42,7 @@ class ScooterApp {
       }
       logout=(username)=>{
         if(loggedIn.includes(username)){
-        loggedIn = loggedIn.filter(e => e !== username)
+        this.loggedIn = loggedIn.filter(e => e !== username)
           console.log("user logged out")
         }else{
           console.log("user cannot be located or user not logged in")
@@ -49,21 +51,63 @@ class ScooterApp {
       create=(station)=>{
         if(Object.keys(stations).includes(station)){
           if(station==='jfkScooters'){
-            stations[station][0]=++stations[station][0]
+            this.stations[station][0]=++stations[station][0]
           }
           if(station==='wavyScooters'){
-            wavyScooters.push(1)
+            this.stations[station][0]=++stations[station][0]
           }
           if(station==='bridgemontScooters'){
-            bridgemontScooters.push(1)
+            this.stations[station][0]=++stations[station][0]
           }
          
           
          
         
           console.log("created new scooter")
+        
         }else throw new Error('no such station exist')
       }
+      rent=(user,scooter)=>{
+        if(this.loggedIn.includes(user)){
+          if(this.stations[scooter][0]===0){
+            console.log("scooter already rented")
+          }else{
+            this.stations[scooter][0]=--this.stations[scooter][0]
+            console.log("scooter rented")
+          }
+        }}
+
+       dock=(scooter,station)=>{
+if(scooter===station){
+  
+  if(station==='jfkScooters'){
+    if(this.stations[station][0]>stations[station][0]){
+      throw new Error('scooter already docked')
+    }else{
+      console.log("scooter is docked")
+      this.stations[scooter][0]=++this.stations[scooter][0]
+  }}
+
+  
+  if(station==='wavyScooters'){
+    if(this.stations[station][0]===stations[station][0]){
+      throw new Error('scooter already docked')
+    }else{
+      console.log("scooter is docked")
+      this.stations[scooter][0]=++this.stations[scooter][0]
+  }}
+
+  if(station==='bridgemontScooters'){
+      if(this.stations[station][0]===this.stations[station][0]){
+        throw new Error('scooter already docked')
+      }else{
+        console.log("scooter is docked")
+        this.stations[scooter][0]=++this.stations[scooter][0]
+  }}}else{throw new Error('Station does not exist')}
+
+
+        
+      
       
    
  
@@ -71,28 +115,23 @@ class ScooterApp {
           
       
       
-      
+    }
 
       
 }
-let user = new ScooterApp()
-user.registerUser("Ciaraerica23","Marines23@",27)
-user.registerUser("Darons","Msmit@",28)
-user.login("Ciaraerica23","Marines23@")
-user.login("Darons","Msmit@")
-/*
-let user2 = new ScooterApp()
-user2.registerUser("Ciaraerica23","hi5",18)
-let user3 = new ScooterApp()
-user3.registerUser("Jamal123","hines23",27)
-console.log(registeredUsers)
-user.login("Ciaraerica23","Marines23@")
-console.log(user2)
-user.logout("Ciaraerica21")
-console.log(loggedIn)*/
-user.create("jfkScooters")
+let scooterApp = new ScooterApp()
+scooterApp.registerUser("Ciaraerica23","Marines23@",27)
+console.log(registeredUsers["Ciaraerica23"])
+scooterApp.registerUser("Darons","Msmit@",28)
+scooterApp.login("Ciaraerica23","Marines23@")
+scooterApp.login("Darons","Msmit@")
 
-console.log(user)
+scooterApp.create("jfkScooters")
+scooterApp.create("jfkScooters")
+scooterApp.create("wavyScooters")
+scooterApp.rent("Ciaraerica23","jfkScooters")
+console.log(scooterApp)
+
 
 
 module.exports = ScooterApp

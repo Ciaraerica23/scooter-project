@@ -18,18 +18,38 @@ describe('scooter object', () => {
 
 //Method tests
 describe('scooter methods', () => {
-   test('scooter is assigned user when checked out', () => {
-    let scooter = new Scooter("jfk")
+   test('scooter is assigned user when rented', () => {
+    let scooter = new Scooter("jfkScooters")
     scooter.rent("mary")
     expect(scooter.user).toEqual("mary")
 
   })
-  //rent method
+  test('station and user is returned null when docked', () => {
+    let scooter = new Scooter("jfkScooters")
+    scooter.rent("mary")
+    scooter.dock("jfkScooters")
+    expect(scooter.user).toEqual(null)
+    expect(scooter.station).toEqual(null)
 
-  //dock method
+  })
+  test('charge equals 100 after charge', async() => {
+    let scooter = new Scooter("jfkScooters")
+      await scooter.recharge(); 
+      expect(scooter.charge).toBe(100)
+   
 
-  //requestRepair method
+   
 
-  //charge method
+  })
+  test('isBroken equals false', async() => {
+    let scooter = new Scooter("jfkScooters")
+      await scooter.repair(); 
+      expect(scooter.isBroken).toBe(false)
+   
+
+   
+
+  })
+  
 
 })

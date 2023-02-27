@@ -1,15 +1,16 @@
 const ScooterApp = require('./ScooterApp');
-const User = require('./User');
+
 
 let serial = 0
 let nextSerial = serial+1
-let charge = 100
+let charge = 10
 let isBroken = false
 
-class Scooter extends ScooterApp{
+
+class Scooter{
   
-  constructor(station,loggedIn){
-    super(loggedIn)
+  constructor(station){
+   
     if(station===undefined)throw new Error("Must have a station")
     this.serial=serial
     this.nextSerial = nextSerial
@@ -65,18 +66,16 @@ rent=(user)=>{
   }if(this.isBroken===true){
    this.repair()
     console.log("this scooter needs repair")}
-    if(this.stations[this.station][0]===0){
-      console.log("no more scooters to rent at this station")
-    }else
-if(this.loggedIn.includes(user)===true){
-this.user = user
+else {
 
+
+this.user=user
 this.serial= this.serial+1
 this.nextSerial=this.serial+1
-this.stations[this.station][0]=this.stations[this.station][0]-1
 
 
-}else{console.log("user needs to login")}
+
+}
 }
 
 }
@@ -84,20 +83,7 @@ this.stations[this.station][0]=this.stations[this.station][0]-1
 let scooter = new Scooter("jfkScooters")
 
 scooter.rent("Ciaraerica23")
-//scooter.rent("Darons")
-//scooter.recharge()
-//scooter.dock("jfkScooters")
-//scooter1.rent("hillary")
-console.log(scooter)
-//console.log(scooter)
-/*scooter.repair()
-scooter.recharge()
-console.log(scooter)
-//scooter.dock("jfk road")
-console.log(scooter)
-let scooter2 = new Scooter("wavy bridge")
-scooter2.rent("Jim")
-console.log(scooter2)*/
+
 
 
 
