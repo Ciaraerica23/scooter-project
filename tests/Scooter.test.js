@@ -50,6 +50,6 @@ describe('scooter methods', () => {
    
 
   })
-  
+
 
 })

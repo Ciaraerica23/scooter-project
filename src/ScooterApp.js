@@ -105,23 +105,19 @@ if(scooter===station){
         this.stations[scooter][0]=++this.stations[scooter][0]
   }}}else{throw new Error('Station does not exist')}
 
-
-        
       
-      
-   
- 
-            
-          
-      
-      
+    }
+    print=()=>{
+      console.log(this.registeredUsers)
+      console.log(this.stations)
     }
 
       
 }
 let scooterApp = new ScooterApp()
 scooterApp.registerUser("Ciaraerica23","Marines23@",27)
-console.log(registeredUsers["Ciaraerica23"])
+
+
 scooterApp.registerUser("Darons","Msmit@",28)
 scooterApp.login("Ciaraerica23","Marines23@")
 scooterApp.login("Darons","Msmit@")
@@ -130,7 +126,9 @@ scooterApp.create("jfkScooters")
 scooterApp.create("jfkScooters")
 scooterApp.create("wavyScooters")
 scooterApp.rent("Ciaraerica23","jfkScooters")
-console.log(scooterApp)
+scooterApp.rent("Ciaraerica23","jfkScooters")
+scooterApp.rent("Ciaraerica23","jfkScooters")
+scooterApp.print()
 
 
 
